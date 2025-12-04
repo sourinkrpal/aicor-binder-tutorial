@@ -39,7 +39,16 @@ A VRB lab runs through a set of virtualization and web technologies that work to
 - **JupyterLab** offers a browser-based development environment for editing and running code.  
 - **VNC** gives you access to a full desktop session in the browser, for example to run GUIs such as simulators.
 
+<img src="./Screenshots/Architectural Diagram.png" width="400px">
+<p align="center"><em>Architectural Flow</em></p>
+
 Together, these systems allow you to edit, run, visualize, and share robotics experiments entirely online, without installing any robotics toolchain locally.
+
+<img src="./Screenshots/01_binder_split_view.png" width="400px">
+<p align="center"><em>Binder Split View</em></p>
+
+<img src="./Screenshots/02_empty_vnc_desktop.png" width="400px">
+<p align="center"><em>VNC Desktop</em></p>
 
 
 ## 2. What’s in the Box?
@@ -108,8 +117,12 @@ To get started:
 
 1. Open the base template repository in your browser.
      You can access the Base Binder Template here: **[IntEL4CoRo/binder-template](https://github.com/IntEL4CoRo/binder-template)**
-3. Click **“Use this template”** to make your own copy.  
-4. Choose a name for your new lab and create the repository (usually public, so Binder can access it).
+
+    <img src="./Screenshots/03_base_repo_template_use.png" width="600px">
+    <p align="center"><em>Base template repository</em></p>
+
+2. Click **“Use this template”** to make your own copy.  
+3. Choose a name for your new lab and create the repository (usually public, so Binder can access it).
 
 Your new Git repository now contains the full lab structure.
 
@@ -123,11 +136,17 @@ Next, download the repository to your computer:
 git clone https://github.com/<YOUR-USERNAME>/<YOUR-LAB>.git
 cd <YOUR-LAB>
 ```
+
+<img src="./Screenshots/04_clone_repo_terminal.png" width="600px">
+<p align="center"><em>Example of cloning the repository</em></p>
+
 Inside the folder, you will see files such as:
 
 - `Dockerfile` or `binder/Dockerfile`  
 - `notebooks/`  
-- `models/` (you can create this folder if needed)  
+- `models/` (you can create this folder if needed)
+
+<img src="./Screenshots/05_repo_open_in_vscode.png" width="600px"> <p align="center"><em>Opening the repo in VSCode</em></p>
 
 These files make up the structure of your virtual lab.
 
@@ -188,18 +207,22 @@ To launch your lab:
 **[binder.intel4coro.de](https://binder.intel4coro.de)**
 2. Paste your repository name (For example: sourinkrpal/my-franka-lab)
 3. Copy the auto-generated launch URL and open it in a new tab.
+
+<img src="./screenshots/06_binder_launch_page.png" width="600px"> <p align="center"><em>Binder Launch Page</em></p>
+
 4.  Binder will:
     
     -   read your repository
-        
     -   build the Docker image from your Dockerfile
-        
     -   start the lab in an online session
         
-
 The first build may take several minutes. Later launches are faster because Binder reuses the cached image.
 
+<img src="./Screenshots/07_binder_building.png" width="600px"> <p align="center"><em>Binder Loading</em></p>
+
 You can also add a Binder badge to your `README.md` so anyone can launch your lab with one click:
+
+<img src="./Screenshots/08_badge_link.png" width="600px"> <p align="center"><em>Badge Link</em></p>
 
 ----------
 
@@ -213,7 +236,8 @@ When Binder finishes building and opens your lab, you will usually see two inter
 -   **VNC Desktop**  
     A virtual Linux desktop accessible through the browser.  
     This is useful for running graphical applications such as robot simulators, PyBullet viewers, MuJoCo GUIs, or custom tools.
-    
+
+<img src="./Screenshots/09_binder_lab_started.png" width="600px"> <p align="center"><em>After Binder Launch</em></p>
 
 From here, you can:
 
@@ -231,4 +255,7 @@ From here, you can:
 -   Commit and push changes
 -   Rebuild through Binder
 
+
 ---
+
+
