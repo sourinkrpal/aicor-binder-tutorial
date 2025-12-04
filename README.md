@@ -12,6 +12,28 @@ This tutorial explains:
 
 ---
 
+## Table of Contents
+
+- [1. What is a Virtual Lab?](#1-what-is-a-virtual-lab)
+  - [1.1 Brief Overview](#11-brief-overview)
+  - [1.2 Technical Overview](#12-technical-overview)
+
+- [2. What’s in the Box?](#2-whats-in-the-box)
+  - [2.1 Preinstalled Tools](#21-preinstalled-tools)
+  - [2.2 Installing More Software](#22-installing-more-software)
+  - [2.3 Example: Installing a Python Package](#23-example-installing-a-python-package)
+
+- [3. How to Set Up Docker + Git to Create Your Lab](#3-how-to-set-up-docker--git-to-create-your-lab)
+  - [3.1 Accessing the Base Lab Template](#31-accessing-the-base-lab-template)
+  - [3.2 Cloning the Repository](#32-cloning-the-repository)
+  - [3.3 Editing the Contents of Your Lab](#33-editing-the-contents-of-your-lab)
+  - [3.4 Install Additional Software (Dockerfile)](#34-install-additional-software-dockerfile)
+  - [3.5 Launching the Lab with Binder](#35-launching-the-lab-with-binder)
+  - [3.6 What You See When Binder Starts](#36-what-you-see-when-binder-starts)
+  - [3.7 Checklist of Typical Edits](#37-checklist-of-typical-edits)
+
+---
+
 ## 1. What is a Virtual Lab?
 
 ### 1.1 Brief Overview
