@@ -39,17 +39,23 @@ A VRB lab runs through a set of virtualization and web technologies that work to
 - **JupyterLab** offers a browser-based development environment for editing and running code.  
 - **VNC** gives you access to a full desktop session in the browser, for example to run GUIs such as simulators.
 
-<img src="./Screenshots/Architectural Diagram.png" width="400px">
-<p><em>Architectural Flow</em></p>
-
 Together, these systems allow you to edit, run, visualize, and share robotics experiments entirely online, without installing any robotics toolchain locally.
 
-<img src="./Screenshots/01_binder_split_view.png" width="400px">
-<p><em>Binder Split View</em></p>
+<p align="center">
+  <img src="./Screenshots/Architectural Diagram.png" width="500px">
+  <br>
+  <em>Architectural Flow</em>
+</p>
 
-<img src="./Screenshots/02_empty_vnc_desktop.png" width="400px">
-<p><em>VNC Desktop</em></p>
+<p align="center">
+  <img src="./Screenshots/01_binder_split_view.png" width="400px">
+  &nbsp;&nbsp;&nbsp;
+  <img src="./Screenshots/02_empty_vnc_desktop.png" width="400px">
+  <br>
+  <em>Binder Split View (left) | VNC Desktop (right)</em>
+</p>
 
+---
 
 ## 2. What’s in the Box?
 
@@ -116,10 +122,13 @@ This template already contains:
 To get started:
 
 1. Open the base template repository in your browser.
-     You can access the Base Binder Template here: **[IntEL4CoRo/binder-template](https://github.com/IntEL4CoRo/binder-template)**
+  You can access the Base Binder Template here: **[IntEL4CoRo/binder-template](https://github.com/IntEL4CoRo/binder-template)**
 
-    <img src="./Screenshots/03_base_repo_template_use.png" width="600px">
-    <p><em>Base template repository</em></p>
+    <p align="center">
+      <img src="./Screenshots/03_base_repo_template_use.png" width="600px">
+      <br>
+      <em>Base template repository</em>
+    </p>
 
 2. Click **“Use this template”** to make your own copy.  
 3. Choose a name for your new lab and create the repository (usually public, so Binder can access it).
@@ -137,8 +146,11 @@ git clone https://github.com/<YOUR-USERNAME>/<YOUR-LAB>.git
 cd <YOUR-LAB>
 ```
 
-<img src="./Screenshots/04_clone_repo_terminal.png" width="600px">
-<p><em>Example of cloning the repository</em></p>
+<p align="center">
+  <img src="./Screenshots/04_clone_repo_terminal.png" width="600px">
+  <br>
+  <em>Example of cloning the repository</em>
+</p>
 
 Inside the folder, you will see files such as:
 
@@ -146,7 +158,11 @@ Inside the folder, you will see files such as:
 - `notebooks/`  
 - `models/` (you can create this folder if needed)
 
-<img src="./Screenshots/05_repo_open_in_vscode.png" width="600px"> <p><em>Opening the repo in VSCode</em></p>
+<p align="center">
+  <img src="./Screenshots/05_repo_open_in_vscode.png" width="600px">
+  <br>
+  <em>Opening the repo in VSCode</em>
+</p>
 
 These files make up the structure of your virtual lab.
 
@@ -208,7 +224,11 @@ To launch your lab:
 2. Paste your repository name (For example: sourinkrpal/my-franka-lab)
 3. Copy the auto-generated launch URL and open it in a new tab.
 
-<img src="./screenshots/06_binder_launch_page.png" width="600px"> <p><em>Binder Launch Page</em></p>
+<p align="center">
+  <img src="./Screenshots/06_binder_launch_page.png" width="600px">
+  <br>
+  <em>Binder Launch Page</em>
+</p>
 
 4.  Binder will:
     
@@ -218,11 +238,19 @@ To launch your lab:
         
 The first build may take several minutes. Later launches are faster because Binder reuses the cached image.
 
-<img src="./Screenshots/07_binder_building.png" width="600px"> <p><em>Binder Loading</em></p>
+<p align="center">
+  <img src="./Screenshots/07_binder_building.png" width="600px">
+  <br>
+  <em>Binder Loading / Building Docker Image</em>
+</p>
 
 You can also add a Binder badge to your `README.md` so anyone can launch your lab with one click:
 
-<img src="./Screenshots/08_badge_link.png" width="600px"> <p><em>Badge Link</em></p>
+<p align="center">
+  <img src="./Screenshots/08_badge_link.png" width="600px">
+  <br>
+  <em>Badge Link</em>
+</p>
 
 ----------
 
@@ -237,7 +265,11 @@ When Binder finishes building and opens your lab, you will usually see two inter
     A virtual Linux desktop accessible through the browser.  
     This is useful for running graphical applications such as robot simulators, PyBullet viewers, MuJoCo GUIs, or custom tools.
 
-<img src="./Screenshots/09_binder_lab_started.png" width="600px"> <p><em>After Binder Launch</em></p>
+<p align="center">
+  <img src="./Screenshots/09_binder_lab_started.png" width="600px">
+  <br>
+  <em>After Binder Launch (JupyterLab + VNC)</em>
+</p>
 
 From here, you can:
 
