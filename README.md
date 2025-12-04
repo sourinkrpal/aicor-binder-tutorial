@@ -31,8 +31,8 @@ Because the entire lab exists inside a portable Docker image and is connected to
 
 ### 1.2 Technical Overview
 
-![Screenshot 01 – Binder split view](./screenshots/01_binder_split_view.png)
-![Screenshot 02 – Empty VNC desktop](./screenshots/02_empty_vnc_desktop.png)
+![Screenshot 01 – Binder split view](./Screenshots/01_binder_split_view.png)
+![Screenshot 02 – Empty VNC desktop](./Screenshots/02_empty_vnc_desktop.png)
 
 A VRB lab runs through a set of virtualization and web technologies that work together:
 
@@ -236,3 +236,4 @@ From here, you can:
 
 
 ---
+
