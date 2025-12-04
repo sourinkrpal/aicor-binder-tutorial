@@ -147,7 +147,7 @@ To get started:
   You can access the Base Binder Template here: **[IntEL4CoRo/binder-template](https://github.com/IntEL4CoRo/binder-template)**
 
     <p align="center">
-      <img src="./Screenshots/03_base_repo_template_use.png" width="600px">
+      <img src="./Screenshots/03_base_repo_template_use.png" width="800px">
       <br>
       <em>Base template repository</em>
     </p>
@@ -169,7 +169,7 @@ cd <YOUR-LAB>
 ```
 
 <p align="center">
-  <img src="./Screenshots/04_clone_repo_terminal.png" width="600px">
+  <img src="./Screenshots/04_clone_repo_terminal.png" width="800px">
   <br>
   <em>Example of cloning the repository</em>
 </p>
@@ -181,7 +181,7 @@ Inside the folder, you will see files such as:
 - `models/` (you can create this folder if needed)
 
 <p align="center">
-  <img src="./Screenshots/05_repo_open_in_vscode.png" width="600px">
+  <img src="./Screenshots/05_repo_open_in_vscode.png" width="800px">
   <br>
   <em>Opening the repo in VSCode</em>
 </p>
@@ -247,7 +247,7 @@ To launch your lab:
 3. Copy the auto-generated launch URL and open it in a new tab.
 
 <p align="center">
-  <img src="./Screenshots/06_binder_launch_page.png" width="600px">
+  <img src="./Screenshots/06_binder_launch_page.png" width="800px">
   <br>
   <em>Binder Launch Page</em>
 </p>
@@ -261,7 +261,7 @@ To launch your lab:
 The first build may take several minutes. Later launches are faster because Binder reuses the cached image.
 
 <p align="center">
-  <img src="./Screenshots/07_binder_building.png" width="600px">
+  <img src="./Screenshots/07_binder_building.png" width="800px">
   <br>
   <em>Binder Loading / Building Docker Image</em>
 </p>
@@ -269,7 +269,7 @@ The first build may take several minutes. Later launches are faster because Bind
 You can also add a Binder badge to your `README.md` so anyone can launch your lab with one click:
 
 <p align="center">
-  <img src="./Screenshots/08_badge_link.png" width="600px">
+  <img src="./Screenshots/08_badge_link.png" width="800px">
   <br>
   <em>Badge Link</em>
 </p>
@@ -288,7 +288,7 @@ When Binder finishes building and opens your lab, you will usually see two inter
     This is useful for running graphical applications such as robot simulators, PyBullet viewers, MuJoCo GUIs, or custom tools.
 
 <p align="center">
-  <img src="./Screenshots/09_binder_lab_started.png" width="600px">
+  <img src="./Screenshots/09_binder_lab_started.png" width="800px">
   <br>
   <em>After Binder Launch (JupyterLab + VNC)</em>
 </p>
