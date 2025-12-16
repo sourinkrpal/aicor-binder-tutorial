@@ -471,7 +471,7 @@ When a button is clicked, the corresponding function is executed.
 This allows user interaction in the notebook to directly trigger Python code.
 
 <p align="center">
-  <img src="./Screenshots/14_start_stop_button.png" width="400px">
+  <img src="./Screenshots/12_start_stop_button.png" width="400px">
   <br>
   <em>Start/Stop Button</em>
 </p>
@@ -491,9 +491,9 @@ All simulation logic is implemented in the `scripts/` folder.
 The notebook acts only as a lightweight control interface.
 
 <p align="center">
-  <img src="./Screenshots/01_binder_split_view.png" width="1000px">
+  <img src="./Screenshots/13_franka_script_jupyterlab.png" width="1000px">
   <br>
-  <em>Start/Stop Button</em>
+  <em>Franka Emika Panda Simulation</em>
 </p>
 
 ## VSCode Remote Development (Optional)
@@ -516,7 +516,11 @@ To open **VSCode directly**, add the following parameter to the Binder URL:
 
 https://binder.intel4coro.de/v2/gh/sourinkrpal/my-franka-lab/main?urlpath=vscode?folder=/home/jovyan/work
 
-
+<p align="center">
+  <img src="./Screenshots/14_vscode_interface.png" width="1000px">
+  <br>
+  <em>VS Code Interface</em>
+</p>
 
 ## 6. Common Troubleshooting
 
