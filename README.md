@@ -30,7 +30,23 @@ This tutorial explains:
   - [3.4 Install Additional Software (Dockerfile)](#34-install-additional-software-dockerfile)
   - [3.5 Launching the Lab with Binder](#35-launching-the-lab-with-binder)
   - [3.6 What You See When Binder Starts](#36-what-you-see-when-binder-starts)
-  - [3.7 Checklist of Typical Edits](#37-checklist-of-typical-edits)
+
+- [4. Adding a Robot Model](#4-adding-a-robot-model)
+  - [4.1 Getting the Robot Model (MuJoCo Menagerie)](#41-getting-the-robot-model-mujoco-menagerie)
+  - [4.2 Scripts and Notebooks](#42-scripts-and-notebooks)
+    - [4.2.1 The `scripts/` Folder](#421-the-scripts-folder)
+    - [4.2.2 The `notebooks/` Folder](#422-the-notebooks-folder)
+    - [4.2.3 How Scripts and Notebooks Work Together](#423-how-scripts-and-notebooks-work-together)
+    - [4.2.4 Why This Structure Is Recommended](#424-why-this-structure-is-recommended)
+
+- [5. Controlling the Simulation from JupyterLab (Simple UI Example)](#5-controlling-the-simulation-from-jupyterlab-simple-ui-example)
+  - [5.1 Creating a Button in a Jupyter Notebook](#51-creating-a-button-in-a-jupyter-notebook)
+  - [5.2 Connecting the Button to a Python Function](#52-connecting-the-button-to-a-python-function)
+
+- [VSCode Remote Development (Optional)](#vscode-remote-development-optional)
+  - [Opening VSCode](#opening-vscode)
+
+- [6. Common Troubleshooting](#6-common-troubleshooting)
 
 ---
 
@@ -81,7 +97,11 @@ Together, these systems allow you to edit, run, visualize, and share robotics ex
 
 ## 2. What’s in the Box?
 
-The VRB base image already includes a few core tools so you can start working right away.
+The VRB uses a shared **base Docker image**, which provides a minimal environment for running a lab.  
+You can view or clone the base image template here:  
+👉 **[VRB Base Image](https://github.com/IntEL4CoRo/binder-template)**
+
+This base image already includes a few core tools so you can start working immediately.
 
 ### 2.1 Preinstalled Tools
 
@@ -101,22 +121,22 @@ The VRB base image already includes a few core tools so you can start working ri
 
 ### 2.2 Installing More Software
 
-If you need extra libraries or tools, you can simply add them to the lab’s `Dockerfile`.  
+You can install **any software you want** into your lab by modifying the `Dockerfile`. Feel free to use whatever tools your project requires.
 When Binder rebuilds your lab, those tools will be included automatically.
 
 Typical things you can add:
-- Physics engines (MuJoCo, Bullet etc.)
-- Scene/robot management libraries (Multiverse)
-- Perception frameworks (RoboKudo)
-- Robot control frameworks (PyCRAM, MoveIt)
+- Physics engines (e.g., MuJoCo, Bullet etc.)
+- Scene/robot management libraries (e.g., Multiverse)
+- Perception frameworks (e.g., RoboKudo)
+- Robot control frameworks (e.g., PyCRAM, MoveIt)
 - Full ROS 2 distributions
-- Data science libraries (NumPy, PyTorch, TensorFlow)
+- Data science libraries (e.g., NumPy, PyTorch, TensorFlow)
 
 ---
 
 ### 2.3 Example: Installing a Python Package
 
-Below is a minimal example showing how to install `numpy` inside your lab's Dockerfile:
+Below is a minimal example s  howing how to install `numpy` inside your lab's Dockerfile:
 
 ```Dockerfile
 # Install Python packages
@@ -300,16 +320,208 @@ From here, you can:
 -   test your robot model,
 -   and continue editing the lab structure.
 
-### 3.7 Checklist of Typical Edits
+## 4. Adding a Robot Model
 
--   Add robot model files
--   Add or update Python scripts
--   Add or modify notebooks
--   Install new packages via Dockerfile
--   Commit and push changes
--   Rebuild through Binder
+This section shows **one of the possible ways** to add and visualize a robot inside a VRB lab, using **MuJoCo** as an example. **MuJoCo is not required** to use the VRB.
 
+You are free to use **any simulator, framework, or workflow** that fits your project, such as other physics engines, ROS-based setups, or custom viewers.  
+The VRB does not enforce a specific software stack, this example is meant only to demonstrate the general idea of integrating a robot into a lab.
+
+### 4.1 Getting the Robot Model (MuJoCo Menagerie)
+
+MuJoCo provides a collection of ready-to-use robot models through the **MuJoCo Menagerie** repository.
+
+To make these models available inside the lab, the repository is cloned during image build time by adding the following line to the `Dockerfile`:
+
+```Dockerfile
+RUN git clone --depth 1 https://github.com/google-deepmind/mujoco_menagerie.git \
+    ${HOME}/work/notebooks/mujoco_menagerie || true
+```
+When Binder builds the lab image, the repository is cloned automatically.
+
+After the build, the `mujoco_menagerie` repository is available inside the lab.
+It contains **many different robot models**, each stored in its own subfolder.
+
+<p align="center">
+  <img src="./Screenshots/10_mujoco_menagerie_overview.png" width="400px">
+  <br>
+  <em>MuJoCo Menagerie repository inside the lab, showing multiple robot models</em>
+</p>
+
+For this example, we focus on the **Franka Emika Panda** robot.
+Opening the `franka_emika_panda` folder shows the files used to define the robot and its simulation scene:
+
+<p align="center">
+  <img src="./Screenshots/11_franka_emika_panda_folder.png" width="400px">
+  <br>
+  <em>Contents of the franka_emika_panda folder</em>
+</p>
+
+In this example, the `scene.xml` file is used to load the robot and its environment in MuJoCo.
+
+### 4.2 Scripts and Notebooks
+
+In this lab, the code is structured so that **simulation logic** and **user interaction** are clearly separated.  
+This makes the example easier to understand, reuse, and extend.
+
+### 4.2.1 The `scripts/` Folder
+
+The `scripts/` folder contains **pure Python code** that implements the simulation logic.
+
+For this example, the main file is:
+
+```
+scripts/franka_mujoco_demo.py
+```
+Here is the link of the file: [scripts/franka_mujoco_demo.py](https://github.com/sourinkrpal/my-franka-lab/blob/main/notebooks/scripts/franka_mujoco_demo.py)
+
+
+This script is responsible for:
+
+- loading the Franka Panda model from the MuJoCo Menagerie,
+- starting the MuJoCo viewer inside the VNC desktop,
+- stepping the simulation,
+- applying simple control commands,
+- exposing a public function (`start_demo`) that can be called from a notebook.
+
+Keeping this logic inside `scripts/` has two advantages:
+
+- the simulation code can be reused in multiple notebooks,
+- the notebook stays clean and focused on interaction, not implementation details.
+
+
+### 4.2.2 The `notebooks/` Folder
+
+The `notebooks/` folder contains **Jupyter notebooks** that users interact with directly.
+
+For this example, a dedicated notebook is used:
+
+```
+notebooks/franka_demo.ipynb
+```
+Here is the link of the file: [notebooks/franka_demo.ipynb](https://github.com/sourinkrpal/my-franka-lab/blob/main/notebooks/my_franka.ipynb)
+
+
+The notebook acts as a **control interface**. It does not contain simulation logic itself.  
+Instead, it:
+
+1. Ensures that the VNC desktop is running.
+2. Imports the simulation code from the `scripts/` folder.
+3. Launches the interactive demo (Start / Stop buttons).
+
+This separation keeps the notebook easy to read and suitable for beginners.
+
+
+### 4.2.3 How Scripts and Notebooks Work Together
+
+The interaction flow is as follows:
+
+1. The user opens the notebook in JupyterLab.
+2. The notebook starts the VNC desktop.
+3. The notebook imports and calls `start_demo()` from the script.
+4. The script launches the MuJoCo viewer in the VNC desktop.
+5. The user controls the simulation using buttons in JupyterLab.
+
+This pattern can be reused for other robots, simulators, or frameworks.
+
+
+### 4.2.4 Why This Structure Is Recommended
+
+This structure is **not mandatory**, but it is recommended because it:
+
+- keeps notebooks simple and readable,
+- avoids duplicated code,
+- makes simulations easier to maintain,
+- allows scripts to be reused outside of Jupyter if needed.
+
+You are free to organize your lab differently if your project requires it.
+
+## 5. Controlling the Simulation from JupyterLab (Simple UI Example)
+
+This section demonstrates a **minimal user interface example** using a Jupyter Notebook.  
+The goal is to show how a simple button can be used to trigger Python code that controls a robot simulation running inside the VNC desktop.
+
+This is only one possible approach. You are free to use other interaction methods or build more complex interfaces if needed.
 
 ---
 
+### 5.1 Creating a Button in a Jupyter Notebook
 
+Jupyter provides basic UI elements through the `ipywidgets` library.  
+In this example, two buttons are created:
+
+- **Start Simulation**
+- **Stop Simulation**
+
+These buttons are defined in Python and displayed directly inside the notebook.
+
+The buttons themselves do not contain simulation logic; they only act as triggers for Python functions.
+
+---
+
+### 5.2 Connecting the Button to a Python Function
+
+Each button is connected to a Python callback function using the `on_click` mechanism:
+
+```python
+start_button.on_click(lambda b: start_clicked(b, out))
+stop_button.on_click(lambda b: stop_clicked(b, out))
+```
+When a button is clicked, the corresponding function is executed.
+This allows user interaction in the notebook to directly trigger Python code.
+
+<p align="center">
+  <img src="./Screenshots/14_start_stop_button.png" width="400px">
+  <br>
+  <em>Start/Stop Button</em>
+</p>
+
+When the **Start Simulation** button is clicked, the callback function:
+
+* launches or reloads the robot simulation,
+* opens the simulation viewer inside the VNC desktop,
+* starts the simulation loop.
+
+When the **Stop Simulation** button is clicked:
+
+* the simulation loop is stopped,
+* the viewer exits cleanly.
+
+All simulation logic is implemented in the `scripts/` folder.
+The notebook acts only as a lightweight control interface. 
+
+## VSCode Remote Development (Optional)
+
+VRB labs can be accessed using a **browser-based version of Visual Studio Code**.  
+This is optional and works alongside JupyterLab.
+
+---
+
+### Opening VSCode
+
+By default, a lab opens in **JupyterLab**.
+
+To open **VSCode directly**, add the following parameter to the Binder URL:
+```
+?urlpath=vscode?folder=/home/jovyan
+```
+
+**Example:**
+
+https://binder.intel4coro.de/v2/gh/sourinkrpal/my-franka-lab/main?urlpath=vscode?folder=/home/jovyan/work
+
+
+
+## 6. Common Troubleshooting
+
+| Problem | Cause | Fix |
+|-------|------|-----|
+| Binder build takes a long time or fails | The Docker image is large or being built for the first time | Wait for the build to finish. Check the Binder build logs for errors if it fails. |
+| Changes do not appear after editing files | Changes were not committed and pushed to Git | Run `git add .`, `git commit -m "Update lab files"`, and `git push`, then relaunch the Binder session. |
+| VNC desktop does not appear | The VNC service was not started | Run the notebook cell that starts the desktop (e.g. `display_desktop()`), or reload the Binder session. |
+| Simulation does not start when clicking the button | The simulation thread is already running or stuck | Click **Stop Simulation** first, or restart the notebook kernel and rerun the cells. |
+| MuJoCo viewer opens but shows nothing | Incorrect model path or missing XML file | Check that the robot files exist and that `scene.xml` is referenced with the correct path. |
+| Jupyter kernel becomes unresponsive | The simulation loop is blocking the main thread | Ensure the simulation runs in a separate thread. Restart the kernel if needed. |
+| Git push is rejected | Remote repository contains newer changes | Run `git pull`, resolve any conflicts, then push again. |
+
+**Tip:** If something behaves unexpectedly, restarting the kernel and relaunching the Binder session resolves most issues.
