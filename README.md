@@ -488,7 +488,13 @@ When the **Stop Simulation** button is clicked:
 * the viewer exits cleanly.
 
 All simulation logic is implemented in the `scripts/` folder.
-The notebook acts only as a lightweight control interface. 
+The notebook acts only as a lightweight control interface.
+
+<p align="center">
+  <img src="./Screenshots/01_binder_split_view.png" width="1000px">
+  <br>
+  <em>Start/Stop Button</em>
+</p>
 
 ## VSCode Remote Development (Optional)
 
