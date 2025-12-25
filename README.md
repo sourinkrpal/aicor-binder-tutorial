@@ -1,4 +1,3 @@
-
 # Creating Your First Lab
 ### Draft by Sourin Kumar Pal
 
@@ -325,7 +324,7 @@ From here, you can:
 This section shows **one of the possible ways** to add and visualize a robot inside a VRB lab, using **MuJoCo** as an example. **MuJoCo is not required** to use the VRB.
 
 You are free to use **any simulator, framework, or workflow** that fits your project, such as other physics engines, ROS-based setups, or custom viewers.  
-The VRB does not enforce a specific software stack, this example is meant only to demonstrate the general idea of integrating a robot into a lab.
+The VRB merely provides infrastructure for hosting and interacting with virtual robot labs. This example demonstrates the general idea of integrating a robot into a lab.
 
 ### 4.1 Getting the Robot Model (MuJoCo Menagerie)
 
@@ -368,12 +367,7 @@ This makes the example easier to understand, reuse, and extend.
 
 The `scripts/` folder contains **pure Python code** that implements the simulation logic.
 
-For this example, the main file is:
-
-```
-scripts/franka_mujoco_demo.py
-```
-Here is the link of the file: [scripts/franka_mujoco_demo.py](https://github.com/sourinkrpal/my-franka-lab/blob/main/notebooks/scripts/franka_mujoco_demo.py)
+For this example, the main file is [scripts/franka_mujoco_demo.py](https://github.com/sourinkrpal/my-franka-lab/blob/main/notebooks/scripts/franka_mujoco_demo.py).
 
 
 This script is responsible for:
@@ -394,13 +388,7 @@ Keeping this logic inside `scripts/` has two advantages:
 
 The `notebooks/` folder contains **Jupyter notebooks** that users interact with directly.
 
-For this example, a dedicated notebook is used:
-
-```
-notebooks/franka_demo.ipynb
-```
-Here is the link of the file: [notebooks/franka_demo.ipynb](https://github.com/sourinkrpal/my-franka-lab/blob/main/notebooks/my_franka.ipynb)
-
+For this example, a dedicated notebook is used: [notebooks/franka_demo.ipynb](https://github.com/sourinkrpal/my-franka-lab/blob/main/notebooks/my_franka.ipynb).
 
 The notebook acts as a **control interface**. It does not contain simulation logic itself.  
 Instead, it:
@@ -422,7 +410,7 @@ The interaction flow is as follows:
 4. The script launches the MuJoCo viewer in the VNC desktop.
 5. The user controls the simulation using buttons in JupyterLab.
 
-This pattern can be reused for other robots, simulators, or frameworks.
+This pattern can be reused for other robots, simulators, or frameworks, and enables users to interact with your lab via JupyterLab.
 
 
 ### 4.2.4 Why This Structure Is Recommended
